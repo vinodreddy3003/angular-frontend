@@ -1,13 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { BackendService } from './backend.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Angular Frontend'; // Initialize the title property
+  errorMessage: string = '';
+
+  constructor(private backendService: BackendService) { }
+
+  fetchDataFromBackend() {
+    this.errorMessage = ''; // Clear any previous error message
+    this.backendService.fetchDataFromBackend().subscribe({
+      next: (data: any) => {
+        console.log('Data from backend:', data);
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 0) {
+          this.errorMessage = 'CORS error: The request was blocked due to CORS policy.';
+        } else {
+          this.errorMessage = `HTTP error: ${error.message}`;
+        }
+      }
+    });
+  }
 }
+
