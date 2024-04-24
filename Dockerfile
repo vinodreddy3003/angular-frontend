@@ -1,22 +1,26 @@
-# Use Alpine Linux as base image
-FROM alpine
+FROM node:alpine
 
 # Install necessary packages
-RUN apk add --no-cache \
-    nodejs \
-    npm \
-    git \
-    && npm install -g @angular/cli \
-    && npm install -g json
+RUN apk add --no-cache npm
+RUN npm install -g @angular/cli
+RUN npm install -g json
 
 # Set working directory
 WORKDIR /app
 
-# Copy source files to working directory
-COPY . /app
+# Copy package.json and package-lock.json if applicable
+COPY package.json .
+COPY package-lock.json .
 
-# Expose any needed ports (optional)
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application
+COPY . .
+
+# Expose port
 EXPOSE 4200
 
-# Start your application
-CMD ["npm","start"]
+# Command to run the application
+CMD ["ng", "serve", "--host", "0.0.0.0"]
+
