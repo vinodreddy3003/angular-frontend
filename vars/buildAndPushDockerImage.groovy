@@ -17,13 +17,6 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                     }
                 }
              }
-             // stage('Authenticate with AWS ECR'){
-             //   steps{
-             //     script{
-             //       sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891376912626.dkr.ecr.us-east-1.amazonaws.com"
-             //     }
-             //   }
-             // }
              stage('Build Docker Image') {
                 steps {
                     script {
@@ -39,6 +32,16 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                         }
                     }
                 }
+              stage('Pull and Run docker image'){
+                steps{
+                  script{
+                  bat 'docker pull 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                  bat 'docker run -d 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                  bat 'docker ps'
+                  bat 'docker ps -a'
+                  }
+                }
+              }
             }
         }
     }
