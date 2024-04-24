@@ -2,7 +2,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
     pipeline {
         agent any
       
-        // stages {
+         stages {
         //     stage('Authenticate with AWS ECR') {
         //         steps {
         //             script {
@@ -17,7 +17,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
         //             }
         //         }
         //     }
-        //     stage('Build Docker Image') {
+             stage('Build Docker Image') {
                 steps {
                     script {
                         docker.build('angular-app')
