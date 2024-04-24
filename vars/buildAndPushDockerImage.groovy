@@ -6,15 +6,15 @@ def call(String imageName, String awsAccountId, String awsRegion) {
             stage('Build Docker Image') {
                 steps {
                     script {
-                        docker.build(angular-app)
+                        docker.build('angular-app')
                     }
                 }
             }
             stage('Push Docker Image to AWS ECR') {
                 steps {
                     script {
-                        docker.withRegistry('https://' + 8913-7691-2626 + '.dkr.ecr.' + us-east-1 + '.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
-                            docker.image(angular-app).push('latest')
+                        docker.withRegistry('https://891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-frontend') {
+                            docker.image('angular-app').push('latest')
                         }
                     }
                 }
