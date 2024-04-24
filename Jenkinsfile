@@ -1,3 +1,3 @@
 @Library('buildAndPushDockerImage') _
 
-buildAndPushDockerImage('your-docker-image-name', 'your-aws-account-id', 'your-aws-region')
+buildAndPushDockerImage('angular-app', '8913-7691-2626', 'us-east-1')
