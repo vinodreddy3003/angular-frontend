@@ -17,9 +17,9 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                     }
                 }
             }
-            stage('Build Docker Image') {
-                steps {
-                    script {
+               stage('Build Docker Image') {
+                   steps {
+                       script {
                         docker.build('angular-app')
                     }
                 }
