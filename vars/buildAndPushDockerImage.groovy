@@ -12,7 +12,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                             credentialsId: 'K8s',
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                         ]]) {
-                            bat 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891376912626.dkr.ecr.us-east-1.amazonaws.com'
+                            sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 810678507647.dkr.ecr.us-east-1.amazonaws.com'
                         }
                     }
                 }
@@ -27,7 +27,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
             stage('Push Docker Image to AWS ECR') {
                 steps {
                     script {
-                        docker.withRegistry('https://891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app') {
+                        docker.withRegistry('https://810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app') {
                             docker.image('angular-app').push('latest')
                         }
                     }
@@ -36,10 +36,10 @@ def call(String imageName, String awsAccountId, String awsRegion) {
             stage('Pull and Run docker image') {
                 steps {
                     script {
-                        bat 'docker pull 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
-                        bat 'docker run -d -p 4200:4200 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
-                        bat 'docker ps'
-                        bat 'docker ps -a'
+                        sh 'docker pull 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                        sh 'docker run -d -p 4200:4200 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                        sh 'docker ps'
+                        sh 'docker ps -a'
                     }
                 }
             }
