@@ -36,7 +36,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
             stage('Pull and Run docker image') {
                 steps {
                     script {
-                        sh 'docker pull 891376912626.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                        sh 'docker pull 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
                         sh 'docker run -d -p 4200:4200 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
                         sh 'docker ps'
                         sh 'docker ps -a'
