@@ -12,7 +12,7 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                             credentialsId: 'K8s',
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                         ]]) {
-                            sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 810678507647.dkr.ecr.us-east-1.amazonaws.com'
+                            bat 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 810678507647.dkr.ecr.us-east-1.amazonaws.com'
                         }
                     }
                 }
@@ -36,10 +36,10 @@ def call(String imageName, String awsAccountId, String awsRegion) {
             stage('Pull and Run docker image') {
                 steps {
                     script {
-                        sh 'docker pull 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
-                        sh 'docker run -d -p 4200:4200 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
-                        sh 'docker ps'
-                        sh 'docker ps -a'
+                        bat 'docker pull 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                        bat 'docker run -d -p 4200:4200 810678507647.dkr.ecr.us-east-1.amazonaws.com/angular-app:latest'
+                        bat 'docker ps'
+                        bat 'docker ps -a'
                     }
                 }
             }
