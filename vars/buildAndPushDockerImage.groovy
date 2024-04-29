@@ -17,11 +17,11 @@ def call(String imageName, String awsAccountId, String awsRegion) {
                     }
                 }
             }
-               stage('Build Docker Image') {
-                   steps {
-                       script {
-                        docker.build('${imageName}')
-                    }
+              stage('Build Docker Image') {
+                  steps {
+                      script {
+                      docker.build('${imageName}')
+                  }
                 }
             }
             stage('Push Docker Image to AWS ECR') {
